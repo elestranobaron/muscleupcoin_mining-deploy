@@ -1,0 +1,4 @@
+- import_tasks: docker.yml
+  when: ansible_host in groups["docker"]
+- import_tasks: preconfig.yml
+  when: (ansible_distribution == "Debian") and ansible_host in groups["docker"]

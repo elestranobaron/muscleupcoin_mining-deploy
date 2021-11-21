@@ -1,0 +1,23 @@
+- name: Préparation du terrain
+  apt:
+    name: "python3-docker"
+- name: Pull de Miner
+  docker_image:
+    source: pull
+    name: "elestranobaron/muscleupcoin_miner:4197980dfe7ac18bab04160ca3df2a290b860c8e"
+- name: Create default containers
+  vars:
+    create_containers: 1
+    default_container_name: whateveryouwant
+    default_container_image: elestranobaron/muscleupcoin_miner:4197980dfe7ac18bab04160ca3df2a290b860c8e
+    default_container_command: sleep 1d
+  docker_container:
+    name: "{{ default_container_name }}"
+    image: "{{ default_container_image }}"
+    #command: "{{ default_container_command }}"
+    state: started
+  with_sequence: count={{ create_containers }}
+#- name: Muscleupcoin container
+#  docker:
+#    name: whateveryouwant
+#    state: reloaded

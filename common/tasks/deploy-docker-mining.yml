@@ -1,0 +1,10 @@
+---
+
+- name: upload mining script
+  copy:
+    src: files/letsgetmining.bash
+    dest: /usr/local/bin
+    mode: "u=rx,g=rx,o=rx"
+  when: ansible_distribution == "Debian"
+  tags:
+    - debian

@@ -1,0 +1,4 @@
+- import_tasks: deploy-docker.yml
+- import_tasks: deploy-docker-mining.yml
+  when: ansible_os_family == "Debian"
+
