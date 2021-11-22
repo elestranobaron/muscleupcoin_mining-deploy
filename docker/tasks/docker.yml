@@ -8,14 +8,19 @@
 - name: Create default containers
   vars:
     create_containers: 1
-    default_container_name: whateveryouwant
-    default_container_image: elestranobaron/muscleupcoin_miner:4197980dfe7ac18bab04160ca3df2a290b860c8e
+    default_container_name: whateveryouwant2
+    default_container_image: elestranobaron/muscleupcoin_miner:47772531c9f6a74266bdf888cbffdc1e3693288f
     default_container_command: sleep 1d
+    display: :0 #host.docker.internal:0
   docker_container:
+    network_mode: host
     name: "{{ default_container_name }}"
     image: "{{ default_container_image }}"
+    #etc_hosts: {
+    #  host.docker.internal: host-gateway,
+    #}
     env: {
-           'DISPLAY':'host.docker.internal:0',
+           'DISPLAY': "{{ display }}",
     }
     detach: yes
     #command: "{{ default_container_command }}"
