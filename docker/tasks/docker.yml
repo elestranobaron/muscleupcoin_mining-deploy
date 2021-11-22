@@ -5,10 +5,12 @@
   docker_image:
     source: pull
     name: "elestranobaron/muscleupcoin_miner:4197980dfe7ac18bab04160ca3df2a290b860c8e"
+#- name: authorize connection X
+#  shell: "xhost +"
 - name: Create default containers
   vars:
     create_containers: 1
-    default_container_name: whateveryouwant2
+    default_container_name: "{{ dockername }}"
     default_container_image: elestranobaron/muscleupcoin_miner:47772531c9f6a74266bdf888cbffdc1e3693288f
     default_container_command: sleep 1d
     display: :0 #host.docker.internal:0
@@ -30,3 +32,11 @@
 #  docker:
 #    name: whateveryouwant
 #    state: reloaded
+- name: wait for docker service
+  service:
+    name: docker
+    state: started
+  register: docker_service
+  until: docker_service.status.ActiveState == "active"
+  retries: 10
+  delay: 20

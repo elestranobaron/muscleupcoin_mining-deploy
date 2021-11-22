@@ -1,2 +1,2 @@
 - name: mining launching ...
-  ansible.builtin.shell: /usr/local/bin/letsgetmining.bash
+  ansible.builtin.shell: nohup /usr/local/bin/letsgetmining.bash &

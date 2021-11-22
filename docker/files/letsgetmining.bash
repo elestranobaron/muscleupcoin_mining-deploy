@@ -1,1 +1,1 @@
-docker exec -it whateveryouwant bash -c "cd src && ./mining.sh"
+docker exec whateveryouwant2 bash -c "cd src && ./mining.sh"
